@@ -1,45 +1,9 @@
-//snow class
-class Snowflake {
-    constructor(canvas) {
-        this.radius = this.random(2, 7);
-        this.x = this.random(0, canvas.width);
-        this.y = this.random(-20, -800);
-        this.Vy = this.random(1, 2)
-        this.color =
-            "rgb(" +
-            Math.floor(Math.random() * 256) +
-            "," +
-            Math.floor(Math.random() * 256) +
-            "," +
-            Math.floor(Math.random() * 256) +
-            ")";
-        this.canvas = canvas;
-    }
-
-    show() {
-        var ctx = this.canvas.getContext("2d");
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.radius, 0, 2 * Math.PI);
-        ctx.closePath();
-        ctx.fillStyle = this.color;
-        ctx.fill();
-    }
-
-    update() {
-        this.y += this.Vy;
-    }
-
-    random(min, max) {
-        return Math.random() * (max - min) + min;
-    }
-}
-
-var Snow = function () {
+var Snow = function (options) {
     //create canvas
     this.canvas = document.createElement("CANVAS");
     this.canvas.width = window.innerWidth;
     this.canvas.height = window.innerHeight;
-    document.getElementById('snow').appendChild(this.canvas);
+    document.getElementById(options.id).appendChild(this.canvas);
 
     //snowflake list
     this.snowflakes = []
@@ -68,5 +32,40 @@ var Snow = function () {
                 this.snowflakes[i].y = random(-20, -200);
             }
         }
+    }
+}
+
+//snowflakes to use in snow
+var Snowflake = function(canvas) {
+    //snowflake elements
+    this.radius = random(2, 7);
+    this.x = random(0, canvas.width);
+    this.y = random(-20, -800);
+    this.Vy = random(1, 2)
+    this.color =
+        "rgb(" +
+        Math.floor(Math.random() * 256) +
+        "," +
+        Math.floor(Math.random() * 256) +
+        "," +
+        Math.floor(Math.random() * 256) +
+        ")";
+    this.canvas = canvas;
+
+    this.show = function() {
+            var ctx = this.canvas.getContext("2d");
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.radius, 0, 2 * Math.PI);
+            ctx.closePath();
+            ctx.fillStyle = this.color;
+            ctx.fill();
+    }
+    
+    this.update = function() {
+            this.y += this.Vy;
+    }
+
+    function random(min, max) {
+        return Math.random() * (max - min) + min;
     }
 }
