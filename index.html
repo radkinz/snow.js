@@ -26,7 +26,9 @@
     <script>
         window.onload = function () {
             //create new snow
-            var snow = new Snow();
+            var snow = new Snow({
+                id: 'snow'
+            });
             snow.snowfall();
         }
     </script>
