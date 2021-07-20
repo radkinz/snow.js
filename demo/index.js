@@ -4,7 +4,7 @@ window.onload = function () {
     //create new snow
     var snow = new Snow.default({
         id: 'snow',
-        theme: 'colorful'
+        theme: 'colors'
     });
     snow.snowfall();
 }
