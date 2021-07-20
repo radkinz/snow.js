@@ -16,8 +16,8 @@ var Snow = function (options) {
 
     //get theme
     var theme = "default"
-    if (options.theme == "colorful") {
-        theme = "colorful"
+    if (options.theme == "colors" || options.theme == "blues" || options.theme == "watermelon" || options.theme == "berry" || options.theme == "pastel") {
+        theme = options.theme;
     }
 
     //snowflake list
@@ -62,7 +62,7 @@ var Snowflake = function (canvas, theme) {
     this.color = "#FFF"
 
     //apply theme
-    if (theme == "colorful") {
+    if (theme == "colors") {
         this.color =
             "rgb(" +
             Math.floor(Math.random() * 256) +
@@ -71,6 +71,53 @@ var Snowflake = function (canvas, theme) {
             "," +
             Math.floor(Math.random() * 256) +
             ")";
+    } else if (theme == "blues") {
+        this.color =
+            "rgb(" +
+            0 +
+            "," +
+            0 +
+            "," +
+            Math.floor(Math.random() * 256) +
+            ")";
+    } else if (theme == "watermelon") {
+        if (Math.random() < 0.5) {
+            this.color =
+                "rgb(" +
+                random(242, 255) +
+                "," +
+                random(0, 50) +
+                "," +
+                random(70, 120) +
+                ")";
+        } else {
+            this.color =
+                "rgb(" +
+                0 +
+                "," +
+                Math.floor(Math.random() * 256) +
+                "," +
+                0 +
+                ")";
+        }
+    } else if (theme == "berry") {
+        this.color =
+            "rgb(" +
+            random(40, 150) +
+            "," +
+            random(0, 50) +
+            "," +
+            random(80, 180) +
+            ")";
+    } else if (theme == "pastel") {
+        this.color =
+            "hsla(" +
+            random(0, 360) +
+            "," +
+            random(40, 80) +
+            "%," +
+            random(60, 80) +
+            "%)";
     }
     this.canvas = canvas;
 
