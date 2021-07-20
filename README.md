@@ -10,19 +10,19 @@ The setup to run `snow.js` is fairly simple. You will have to create a new insta
 ```html
 <div id="snow"></div>
 
-<script>
+<script type="module">
 //import the Snow module
-import * as Snow from './node_modules/snowfallzz/snow.js'
+import * as Snow from '/node_modules/snowfallzz/snow.js'
 
 // Snow script included on the page, already.
 window.onload = function () {
     var snow = new Snow.default({
         id: 'snow'
     });
-}
 
-//Can run the snowfall by calling:
-snow.snowfall();
+    //Can run the snowfall by calling:
+    snow.snowfall();
+}
 </script>
 ```
 
