@@ -1,4 +1,13 @@
 var Snow = function (options) {
+    //change style of given element to make full screen div
+    document.getElementById(options.id).style.position = "fixed";
+    document.getElementById(options.id).style.top = 0;
+    document.getElementById(options.id).style.left = 0;
+    document.getElementById(options.id).style.right = 0;
+    document.getElementById(options.id).style.bottom = 0;
+    document.getElementById(options.id).style.zIndex = 1000;
+    document.getElementById(options.id).style.pointerEvents = "none";
+
     //create canvas
     this.canvas = document.createElement("CANVAS");
     this.canvas.width = window.innerWidth;
@@ -17,7 +26,7 @@ var Snow = function (options) {
     }
 
     this.snowfall = function () {
-        requestAnimationFrame(()=>this.snowfall());
+        requestAnimationFrame(() => this.snowfall());
 
         //clear canvas
         const context = this.canvas.getContext('2d');
@@ -36,7 +45,7 @@ var Snow = function (options) {
 }
 
 //snowflakes to use in snow
-var Snowflake = function(canvas) {
+var Snowflake = function (canvas) {
     //snowflake elements
     this.radius = random(2, 7);
     this.x = random(0, canvas.width);
@@ -52,20 +61,22 @@ var Snowflake = function(canvas) {
         ")";
     this.canvas = canvas;
 
-    this.show = function() {
-            var ctx = this.canvas.getContext("2d");
-            ctx.beginPath();
-            ctx.arc(this.x, this.y, this.radius, 0, 2 * Math.PI);
-            ctx.closePath();
-            ctx.fillStyle = this.color;
-            ctx.fill();
+    this.show = function () {
+        var ctx = this.canvas.getContext("2d");
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius, 0, 2 * Math.PI);
+        ctx.closePath();
+        ctx.fillStyle = this.color;
+        ctx.fill();
     }
-    
-    this.update = function() {
-            this.y += this.Vy;
+
+    this.update = function () {
+        this.y += this.Vy;
     }
 
     function random(min, max) {
         return Math.random() * (max - min) + min;
     }
 }
+
+export default Snow;
