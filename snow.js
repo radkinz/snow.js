@@ -14,10 +14,16 @@ var Snow = function (options) {
     this.canvas.height = window.innerHeight;
     document.getElementById(options.id).appendChild(this.canvas);
 
+    //get theme
+    var theme = "default"
+    if (options.theme == "colorful") {
+        theme = "colorful"
+    }
+
     //snowflake list
     this.snowflakes = []
     for (let i = 0; i < 250; i++) {
-        this.snowflakes[i] = new Snowflake(this.canvas);
+        this.snowflakes[i] = new Snowflake(this.canvas, theme);
         this.snowflakes[i].show();
     }
 
@@ -45,20 +51,27 @@ var Snow = function (options) {
 }
 
 //snowflakes to use in snow
-var Snowflake = function (canvas) {
+var Snowflake = function (canvas, theme) {
     //snowflake elements
     this.radius = random(2, 7);
     this.x = random(0, canvas.width);
     this.y = random(-20, -800);
     this.Vy = random(1, 2)
-    this.color =
-        "rgb(" +
-        Math.floor(Math.random() * 256) +
-        "," +
-        Math.floor(Math.random() * 256) +
-        "," +
-        Math.floor(Math.random() * 256) +
-        ")";
+
+    //set default
+    this.color = "#FFF"
+
+    //apply theme
+    if (theme == "colorful") {
+        this.color =
+            "rgb(" +
+            Math.floor(Math.random() * 256) +
+            "," +
+            Math.floor(Math.random() * 256) +
+            "," +
+            Math.floor(Math.random() * 256) +
+            ")";
+    }
     this.canvas = canvas;
 
     this.show = function () {
