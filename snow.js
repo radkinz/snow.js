@@ -1,17 +1,24 @@
 var Snow = function (options) {
-    //change style of given element to make full screen div
-    document.getElementById(options.id).style.position = "fixed";
-    document.getElementById(options.id).style.top = 0;
-    document.getElementById(options.id).style.left = 0;
-    document.getElementById(options.id).style.right = 0;
-    document.getElementById(options.id).style.bottom = 0;
+    //alter size if user did not want it to be fullscreen
+    if (isNaN(options.width) || isNaN(options.height)) {
+        document.getElementById(options.id).style.position = "fixed";
+        document.getElementById(options.id).style.top = 0;
+        document.getElementById(options.id).style.left = 0;
+        document.getElementById(options.id).style.right = 0;
+        document.getElementById(options.id).style.bottom = 0;
+    }
     document.getElementById(options.id).style.zIndex = 1000;
     document.getElementById(options.id).style.pointerEvents = "none";
 
     //create canvas
     this.canvas = document.createElement("CANVAS");
-    this.canvas.width = window.innerWidth;
-    this.canvas.height = window.innerHeight;
+    if (!isNaN(options.width) && !isNaN(options.height)){
+        this.canvas.width = options.width;
+        this.canvas.height = options.height;
+    } else {
+        this.canvas.width = window.innerWidth;
+        this.canvas.height = window.innerHeight;
+    }
     document.getElementById(options.id).appendChild(this.canvas);
 
     //get theme
@@ -20,10 +27,20 @@ var Snow = function (options) {
         theme = options.theme;
     }
 
+    //change size
+    var min = 2;
+    var max = 7;
+    if (!isNaN(options.min_size)) {
+        min = options.min_size;
+    }
+    if (!isNaN(options.max_size)) {
+        max = options.max_size;
+    }
+
     //snowflake list
     this.snowflakes = []
     for (let i = 0; i < 250; i++) {
-        this.snowflakes[i] = new Snowflake(this.canvas, theme);
+        this.snowflakes[i] = new Snowflake(this.canvas, theme, min, max);
         this.snowflakes[i].show();
     }
 
@@ -51,9 +68,9 @@ var Snow = function (options) {
 }
 
 //snowflakes to use in snow
-var Snowflake = function (canvas, theme) {
+var Snowflake = function (canvas, theme, min, max) {
     //snowflake elements
-    this.radius = random(2, 7);
+    this.radius = random(min, max);
     this.x = random(0, canvas.width);
     this.y = random(-20, -800);
     this.Vy = random(1, 2)
