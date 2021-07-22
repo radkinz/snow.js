@@ -2,9 +2,7 @@
 `Snow.js` is a stand alone javascript library that helps "cool down" the web with a beautiful snowfall. 
 
 ### Installation
-`npm i snowfallzz -- save`
-
-*The latest version of this npm package has not yet been updated to include the option to change snowflake sizes or toggle snowfall*
+`npm i snowfall.js -- save`
 
 ### JS
 The setup to run `snow.js` is fairly simple. You will have to create a new instance of `Snow`, and pass it an element id that you want to encapsulate the snowfall.
@@ -14,7 +12,7 @@ The setup to run `snow.js` is fairly simple. You will have to create a new insta
 
 <script type="module">
 //import the Snow module
-import * as Snow from '/node_modules/snowfallzz/snow.js'
+import * as Snow from '/node_modules/snowfall.js/snow.js'
 
 // Snow script included on the page, already.
 window.onload = function () {
