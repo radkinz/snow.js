@@ -1,24 +1,16 @@
 var Snow = function (options) {
-    //alter size if user did not want it to be fullscreen
-    if (isNaN(options.width) || isNaN(options.height)) {
-        document.getElementById(options.id).style.position = "fixed";
-        document.getElementById(options.id).style.top = 0;
-        document.getElementById(options.id).style.left = 0;
-        document.getElementById(options.id).style.right = 0;
-        document.getElementById(options.id).style.bottom = 0;
-    }
+    document.getElementById(options.id).style.position = "fixed";
+    document.getElementById(options.id).style.top = 0;
+    document.getElementById(options.id).style.left = 0;
+    document.getElementById(options.id).style.right = 0;
+    document.getElementById(options.id).style.bottom = 0;
     document.getElementById(options.id).style.zIndex = 1000;
     document.getElementById(options.id).style.pointerEvents = "none";
 
     //create canvas
-    this.canvas = document.createElement("CANVAS");
-    if (!isNaN(options.width) && !isNaN(options.height)){
-        this.canvas.width = options.width;
-        this.canvas.height = options.height;
-    } else {
-        this.canvas.width = window.innerWidth;
-        this.canvas.height = window.innerHeight;
-    }
+    this.canvas = document.createElement("canvas"); //add random number to change canvas id
+    this.canvas.width = window.innerWidth;
+    this.canvas.height = window.innerHeight;
     document.getElementById(options.id).appendChild(this.canvas);
 
     //get theme
@@ -48,22 +40,41 @@ var Snow = function (options) {
         return Math.random() * (max - min) + min;
     }
 
+    //boolean is snow is true or false
+    this.go = false;
     this.snowfall = function () {
         requestAnimationFrame(() => this.snowfall());
 
-        //clear canvas
-        const context = this.canvas.getContext('2d');
-        context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        if (this.go) {
+            //clear canvas
+            const context = this.canvas.getContext('2d');
+            context.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-        //update snowflakes
-        for (var i = 0; i < 250; i++) {
-            this.snowflakes[i].update();
-            this.snowflakes[i].show();
+            //update snowflakes
+            for (var i = 0; i < 250; i++) {
+                this.snowflakes[i].update();
+                this.snowflakes[i].show();
 
-            if (this.snowflakes[i].y > this.canvas.height) {
-                this.snowflakes[i].y = random(-20, -200);
+                if (this.snowflakes[i].y > this.canvas.height) {
+                    this.snowflakes[i].y = random(-20, -200);
+                }
             }
         }
+    }
+
+    this.snowfall();
+
+    this.start = function () {
+        this.go = true;
+    }
+
+    this.stop = function () {
+        this.go = false;
+    }
+
+    this.toggle = function () {
+        console.log(this.go);
+        this.go = !this.go;
     }
 }
 
@@ -74,6 +85,7 @@ var Snowflake = function (canvas, theme, min, max) {
     this.x = random(0, canvas.width);
     this.y = random(-20, -800);
     this.Vy = random(1, 2)
+    console.log(this.canvas)
 
     //set default
     this.color = "#FFF"
