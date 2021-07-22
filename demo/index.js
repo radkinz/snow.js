@@ -1,4 +1,4 @@
-import * as Snow from './node_modules/snowfallzz/snow.js'
+import * as Snow from './node_modules/snowfall.js/snow.js'
 
 window.onload = function () {
     //create new snow
