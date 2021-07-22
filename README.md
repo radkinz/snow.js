@@ -4,7 +4,7 @@
 ### Installation
 `npm i snowfallzz -- save`
 
-*The latest version of this npm package has not yet been updated to include the option to change snowflake or snowfall sizes*
+*The latest version of this npm package has not yet been updated to include the option to change snowflake sizes or toggle snowfall*
 
 ### JS
 The setup to run `snow.js` is fairly simple. You will have to create a new instance of `Snow`, and pass it an element id that you want to encapsulate the snowfall.
@@ -23,7 +23,7 @@ window.onload = function () {
     });
 
     //Can run the snowfall by calling:
-    snow.snowfall();
+    snow.start();
 }
 </script>
 ```
@@ -65,18 +65,27 @@ window.onload = function () {
 ```
 For reference the default range is a min size of 2 and a max size of 7.
 
-### Snowfall Size
-Your default snowfall will encapsulate your entire website, but maybe that is too much snow? If you want your snowfall to be limited to a specific size, then you can pass a width and a height element....
+### Toggle Snowfall
+
+Maybe you do not want snowfall on your website 24/7? In that case, you can stop the snowfall with ``snow.stop()`` and you can toggle the snowfall with ``snow.toggle()``. 
+
+The toggle feature can be good, for example, if you want the user to be able to switch back and forth between snow and no snow by a mouse click as seen with the code...
 
 ```html
-<script type = "module">
+<script type="module">
 window.onload = function () {
+    //create new snow
     var snow = new Snow.default({
         id: 'snow',
-        theme: 'colors',
-        width: 500,
-        height: 500
+        theme: 'berry',
+        min_size: 1,
+        max_size: 5
     });
+    snow.start();
+
+    document.querySelector("body").onclick = function () {
+        snow.toggle();
+    }
 }
 </script>
 ```
