@@ -1,0 +1,23 @@
+h1 {
+    color: white;
+}
+
+body {
+    background-color: black;
+} 
+
+.title {
+    color: white;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    font-weight: 900;
+    font-size: 500%;
+    padding: 200px 0px 300px 0px;
+}
+
+.title::last-child {
+    padding-bottom: 20px;
+    font-size: 1px;
+}
+
