@@ -2,7 +2,7 @@
 `Snow.js` is a stand alone javascript library that helps "cool down" the web with a beautiful snowfall. 
 
 ### Installation
-`npm i snowfall.js -- save`
+`npm install snowfall.js`
 
 ### JS
 The setup to run `snow.js` is fairly simple. You will have to create a new instance of `Snow`, and pass it an element id that you want to encapsulate the snowfall.
