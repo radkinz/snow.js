@@ -1,4 +1,4 @@
-import * as Snow from '/snow.js'
+import * as Snow from '/snow.js/snow.js'
 
 window.onload = function () {
     //create new snow
